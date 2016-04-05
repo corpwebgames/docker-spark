@@ -1,0 +1,17 @@
+language: python
+python:
+  - 2.7
+
+services:
+  - docker
+
+install:
+  - docker build -t spark .
+  - docker run --entrypoint /bin/bash --name spark spark -c "pip list"
+
+script:
+  - docker ps -a
+
+notifications:
+  slack:
+    secure: eheAGAc764ocByu10a1AHMaXv6uh/If6YEkQ8fLJtNlljlAEV/SbiPW8kjF2Uu9rfIj5b0UWzR7A1+2irYZYitVUbJUUGvgsZOXdt5tdzIwwyUkRdXFCZz1GeqFJsxU4sccu3ChOiJQwy7qfmrDWwOLXJ1uM0Vrlbe6ZN1jUSunyBlZGjhOQFyGKEw7QsVhd3AIoXBzKBoSDqLDVugvo/Am1UiYmdwBBZJNq1dKfvzQaPe0b4O/xbLFIeIxmS20avCpYpQ23upIR9XskbI5iCCLGfW3w6CFTuZboomLXjTcZFD5G0UW5ZvpQ8/tBbIdwdUNQuQ2SBM7TheehiynODMSDiQDRcqP6un75cSu7Cty3y/yIQG4TFeuDZDEKk75Ogmi8ePCEelWMxKBbMdLPsBKexukZ38j+OwnBree51y5I5W/dg6coBz0aSa/i00YftvkJGSnSi5COPuiodmZutpoR0GQE8lQP2mwIXsqn28ms2VVZLHuU+32YtHSq2z8bwPBGNSDT+mCY+wU3T4LM3d3Vm9ZXL853G3LxOqnLgNh8VpmK4X7dUFtrIih2YF7iwCcaDSW3yqYj786EZZEK45C3cnRM7udTU/syMlU+UN44wAj+c3zB7y9Gyv+UnauRyhxLWhpi01B2qkPBlo9FIF8lKhWz5TUlo6xWAvltWjE=
