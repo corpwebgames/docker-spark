@@ -30,7 +30,7 @@ RUN apt-get update \
 
 RUN pip install requests --upgrade 
 
-RUN pip install elasticsearch zdesk
+RUN pip install elasticsearch zdesk boto3
 
 ENV SPARK_HOME /usr/local/spark
 
