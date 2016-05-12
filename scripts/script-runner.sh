@@ -5,6 +5,14 @@ cd /usr/local/spark/bin/
 if aws s3 cp $1 $file ; then
 chmod +x $file
 
+if [ "$LIB_PATH" ]; then
+    if aws s3 cp s3://$LIB_PATH lib.zip ; then
+        unzip -o lib.zip
+    else
+        echo "Lib $LIB_PATH not found"
+    fi
+fi
+
 docker-run-spark-env.sh $SPARK_HOME/bin/spark-submit \
 --master local[*] \
 --driver-memory $DRIVER_MEMORY \
