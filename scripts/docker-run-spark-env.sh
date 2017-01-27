@@ -5,11 +5,11 @@ export SPARK_MASTER_PORT=7077
 export  SPARK_MASTER_WEBUI_PORT=8080
 export SPARK_WORKER_PORT=8888
 export SPARK_WORKER_WEBUI_PORT=8081
-export SPECIAL_SPARK_OPTS="-Dspark.driver.port=57001 -Dspark.fileserver.port=57002 -Dspark.broadcast.port=57003 -Dspark.replClassServer.port=57004 -Dspark.blockManager.port=57005 -Dspark.executor.port=57006 -Dspark.ui.port=54040 -Dspark.broadcast.factory=org.apache.spark.broadcast.HttpBroadcastFactory $SPECIAL_SPARK_OPTS"
+#export SPECIAL_SPARK_OPTS="-Dspark.driver.port=57001 -Dspark.fileserver.port=57002 -Dspark.broadcast.port=57003 -Dspark.replClassServer.port=57004 -Dspark.blockManager.port=57005 -Dspark.executor.port=57006 -Dspark.ui.port=54040 -Dspark.broadcast.factory=org.apache.spark.broadcast.HttpBroadcastFactory $SPECIAL_SPARK_OPTS"
 
-export SPARK_MASTER_OPTS="$SPECIAL_SPARK_OPTS"
-export SPARK_WORKER_OPTS="$SPECIAL_SPARK_OPTS"
-export SPARK_JAVA_OPTS="$SPECIAL_SPARK_OPTS"
+#export SPARK_MASTER_OPTS="$SPECIAL_SPARK_OPTS"
+#export SPARK_WORKER_OPTS="$SPECIAL_SPARK_OPTS"
+#export SPARK_JAVA_OPTS="$SPECIAL_SPARK_OPTS"
 
 export SPARK_MASTER_IP=$DOCKER_HOSTNAME
 export SPARK_LOCAL_IP=$DOCKER_HOSTNAME

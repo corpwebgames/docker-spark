@@ -28,7 +28,9 @@ RUN apt-get update \
 	&& apt-get install -y python-pandas \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN pip install elasticsearch zdesk
+RUN pip install requests --upgrade 
+
+RUN pip install elasticsearch zdesk boto3
 
 ENV SPARK_HOME /usr/local/spark
 
