@@ -19,6 +19,6 @@ export SPARK_LOCAL_HOSTNAME=$DOCKER_HOSTNAME
 aws s3 cp s3://$S3_BUCKET_CONF/hive/config/core-site.xml /usr/local/spark/conf/core-site.xml > /dev/null
 aws s3 cp s3://$S3_BUCKET_CONF/hive/config/hive-site.xml /usr/local/spark/conf/hive-site.xml > /dev/null
 env | grep SPARK | awk '{print "export \"" $0 "\""}' > /usr/local/spark/conf/spark-env.sh
-export CLASSPATH="/usr/local/spark/lib/mysql-connector-java.jar"
+export CLASSPATH="/usr/local/spark/jars/mysql-connector-java.jar"
 export PATH="$PATH:/usr/local/spark/bin"
 exec $@
