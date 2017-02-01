@@ -13,6 +13,7 @@ RUN \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-redshift_2.10/2.0.1/spark-redshift_2.10-2.0.1.jar -o /usr/local/spark/jars/spark-redshift.jar \
 	&& curl -s http://central.maven.org/maven2/org/apache/spark/spark-streaming-kinesis-asl-assembly_2.11/2.0.0/spark-streaming-kinesis-asl-assembly_2.11-2.0.0.jar -o /usr/local/spark/jars/spark-streaming-kinesis-asl.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-avro_2.10/3.1.0/spark-avro_2.10-3.1.0.jar -o /usr/local/spark/jars/spark-avro.jar \
+	&& curl -s http://central.maven.org/maven2/com/eclipsesource/minimal-json/minimal-json/0.9.4/minimal-json-0.9.4.jar -o /usr/local/spark/jars/minimal-json.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-csv_2.10/1.5.0/spark-csv_2.10-1.5.0.jar -o /usr/local/spark/jars/spark-csv.jar
 
 ADD scripts/start-master.sh /start-master.sh
@@ -35,7 +36,7 @@ ENV SPARK_HOME /usr/local/spark
 
 ENV SPARK_DRIVER_CLASSPATH="/usr/local/spark/jars/mysql-connector-java.jar"
 
-ENV SPARK_JARS="/usr/local/spark/jars/spark-avro.jar,/usr/local/spark/jars/spark-redshift.jar,/usr/local/spark/jars/RedshiftJDBC41-1.1.10.1010.jar"
+ENV SPARK_JARS="/usr/local/spark/jars/spark-avro.jar,/usr/local/spark/jars/spark-redshift.jar,/usr/local/spark/jars/RedshiftJDBC41-1.1.10.1010.jar,/usr/local/spark/jars/minimal-json.jar"
 
 ENV SPARK_MASTER_OPTS="-Dspark.driver.port=7001 -Dspark.fileserver.port=7002 -Dspark.broadcast.port=7003 -Dspark.replClassServer.port=7004 -Dspark.blockManager.port=7005 -Dspark.executor.port=7006 -Dspark.ui.port=4040 -Dspark.broadcast.factory=org.apache.spark.broadcast.HttpBroadcastFactory"
 ENV SPARK_WORKER_OPTS="-Dspark.driver.port=7001 -Dspark.fileserver.port=7002 -Dspark.broadcast.port=7003 -Dspark.replClassServer.port=7004 -Dspark.blockManager.port=7005 -Dspark.executor.port=7006 -Dspark.ui.port=4040 -Dspark.broadcast.factory=org.apache.spark.broadcast.HttpBroadcastFactory"
