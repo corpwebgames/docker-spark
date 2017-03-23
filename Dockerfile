@@ -14,15 +14,24 @@ RUN \
 	&& curl -s http://central.maven.org/maven2/org/apache/spark/spark-streaming-kinesis-asl-assembly_2.11/2.0.0/spark-streaming-kinesis-asl-assembly_2.11-2.0.0.jar -o /usr/local/spark/jars/spark-streaming-kinesis-asl.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-avro_2.10/3.1.0/spark-avro_2.10-3.1.0.jar -o /usr/local/spark/jars/spark-avro.jar \
 	&& curl -s http://central.maven.org/maven2/com/eclipsesource/minimal-json/minimal-json/0.9.4/minimal-json-0.9.4.jar -o /usr/local/spark/jars/minimal-json.jar \
-	&& curl -s http://central.maven.org/maven2/com/databricks/spark-csv_2.10/1.5.0/spark-csv_2.10-1.5.0.jar -o /usr/local/spark/jars/spark-csv.jar
+	&& curl -s http://central.maven.org/maven2/com/databricks/spark-csv_2.10/1.5.0/spark-csv_2.10-1.5.0.jar -o /usr/local/spark/jars/spark-csv.jar \
+	&& curl -s http://central.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar -o /usr/local/spark/jars/gson-2.2.4.jar \
+        #&& curl -s http://central.maven.org/maven2/com/amazon/emr/emr-dynamodb-hive/4.2.0/emr-dynamodb-hive-4.2.0.jar -o /usr/local/spark/jars/emr-dynamodb-hive-4.2.0.jar \
+        #&& curl -s http://central.maven.org/maven2/com/amazon/emr/emr-dynamodb-hadoop/4.2.0/emr-dynamodb-hadoop-4.2.0.jar -o /usr/local/spark/jars/emr-dynamodb-hadoop-4.2.0.jar \
+	&& curl -s http://central.maven.org/maven2/com/amazonaws/aws-java-sdk-dynamodb/1.10.75.1/aws-java-sdk-dynamodb-1.10.75.1.jar -o /usr/local/spark/jars/aws-java-sdk-dynamodb-1.10.75.1.jar
+
+
 
 ADD scripts/start-master.sh /start-master.sh
 ADD scripts/start-worker /start-worker.sh
 ADD scripts/spark-shell.sh  /spark-shell.sh
-ADD scripts/spark-defaults.conf /spark-defaults.conf
+ADD scripts/spark-defaults.conf /usr/local/spark/conf/spark-defaults.conf
+ADD scripts/log4j.properties /usr/local/spark/conf/log4j.properties
 ADD scripts/remove_alias.sh /remove_alias.sh
 ADD scripts/docker-run-spark-env.sh /usr/local/bin/docker-run-spark-env.sh
 ADD scripts/script-runner.sh /usr/local/bin/script-runner.sh
+ADD lib/emr-ddb-hadoop.jar /usr/local/spark/jars/emr-ddb-hadoop.jar
+ADD lib/emr-ddb-hive.jar /usr/local/spark/jars/emr-ddb-hive.jar
 
 RUN apt-get update \
 	&& apt-get install -y python-pandas \
