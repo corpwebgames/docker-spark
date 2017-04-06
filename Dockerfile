@@ -31,6 +31,7 @@ ADD scripts/log4j.properties /usr/local/spark/conf/log4j.properties
 ADD scripts/remove_alias.sh /remove_alias.sh
 ADD scripts/docker-run-spark-env.sh /usr/local/bin/docker-run-spark-env.sh
 ADD scripts/script-runner.sh /usr/local/bin/script-runner.sh
+ADD scripts/sql-runner.sh /usr/local/bin/sql-runner.sh
 ADD lib/emr-ddb-hadoop.jar /usr/local/spark/jars/emr-ddb-hadoop.jar
 ADD lib/emr-ddb-hive.jar /usr/local/spark/jars/emr-ddb-hive.jar
 
