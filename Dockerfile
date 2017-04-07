@@ -11,7 +11,7 @@ RUN \
 	&& curl -s http://central.maven.org/maven2/org/apache/commons/commons-csv/1.2/commons-csv-1.2.jar -o /usr/local/spark/jars/commons-csv-1.2.jar \
 	&& curl -s https://s3.amazonaws.com/redshift-downloads/drivers/RedshiftJDBC41-1.1.10.1010.jar -o /usr/local/spark/jars/RedshiftJDBC41-1.1.10.1010.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-redshift_2.10/2.0.1/spark-redshift_2.10-2.0.1.jar -o /usr/local/spark/jars/spark-redshift.jar \
-	#&& curl -s http://central.maven.org/maven2/org/apache/spark/spark-streaming-kinesis-asl-assembly_2.11/2.0.0/spark-streaming-kinesis-asl-assembly_2.11-2.0.0.jar -o /usr/local/spark/jars/spark-streaming-kinesis-asl.jar \
+	&& curl -s http://central.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.10.75.1/aws-java-sdk-s3-1.10.75.1.jar -o /usr/local/spark/jars/aws-java-sdk-s3-1.10.75.1.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-avro_2.10/3.1.0/spark-avro_2.10-3.1.0.jar -o /usr/local/spark/jars/spark-avro.jar \
 	&& curl -s http://central.maven.org/maven2/com/eclipsesource/minimal-json/minimal-json/0.9.4/minimal-json-0.9.4.jar -o /usr/local/spark/jars/minimal-json.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-csv_2.10/1.5.0/spark-csv_2.10-1.5.0.jar -o /usr/local/spark/jars/spark-csv.jar \
