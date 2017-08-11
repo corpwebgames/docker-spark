@@ -23,8 +23,9 @@ $file $ARGS 2>&1 | tee $file-$ID.out
 _status=${PIPESTATUS[0]}
 _output=`cat $file-$ID.out | head -c65535`
 
-times=$(date +"%Y%m%d%H%M")
-  if [ "$S3_LOG_BUCKET" ]; then aws s3 cp $file-$ID.out s3://$S3_LOG_BUCKET/docker/$CATEGORY/$ID/$file-$times.out; fi
+day=$(date +"%Y%m%d")
+times=$(date +"%H%M")
+  if [ "$S3_LOG_BUCKET" ]; then aws s3 cp $file-$ID.out s3://$S3_LOG_BUCKET/docker/$CATEGORY/$ID/$day/$file-$times.out; fi
 echo "status $_status"
   exit $_status
 
