@@ -1,5 +1,4 @@
-FROM dpatriot/docker-awscli-java8
-MAINTAINER Shago Vyacheslav <v.shago@corpwebgames.com>
+FROM webgames/awscli-java8
 
 RUN \
 	curl -s http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.4.tgz | tar -xz -C /usr/local/ \
@@ -39,9 +38,9 @@ RUN apt-get update \
 	&& apt-get install -y python-pandas \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN pip install requests --upgrade 
+#RUN pip install requests --upgrade 
 
-RUN pip install elasticsearch zdesk boto3
+RUN pip install requests==2.2.1 pandas==0.20.3 elasticsearch==2.3.0 zdesk==2.4.0 boto3
 
 ENV SPARK_HOME /usr/local/spark
 
@@ -57,6 +56,7 @@ ENV SPARK_MASTER_WEBUI_PORT 8080
 ENV SPARK_WORKER_PORT 8888
 ENV SPARK_WORKER_WEBUI_PORT 8081
 ENV DRIVER_MEMORY 1G
+ENV PYTHONIOENCODING utf-8
 
 EXPOSE 8080 7077 8888 8081 4040 7001 7002 7003 7004 7005 7006
 
