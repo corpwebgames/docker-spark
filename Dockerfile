@@ -1,9 +1,9 @@
 FROM webgames/awscli-java8
 
 RUN \
-	curl -s http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.4.tgz | tar -xz -C /usr/local/ \
+	curl -s http://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.6.tgz | tar -xz -C /usr/local/ \
 	&& cd /usr/local \
-	&& ln -s spark-2.0.2-bin-hadoop2.4 spark
+	&& ln -s spark-2.2.0-bin-hadoop2.6 spark
 
 RUN \
 	curl -s http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar -o /usr/local/spark/jars/mysql-connector-java.jar \
@@ -15,11 +15,10 @@ RUN \
 	&& curl -s http://central.maven.org/maven2/com/eclipsesource/minimal-json/minimal-json/0.9.4/minimal-json-0.9.4.jar -o /usr/local/spark/jars/minimal-json.jar \
 	&& curl -s http://central.maven.org/maven2/com/databricks/spark-csv_2.10/1.5.0/spark-csv_2.10-1.5.0.jar -o /usr/local/spark/jars/spark-csv.jar \
 	&& curl -s http://central.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar -o /usr/local/spark/jars/gson-2.2.4.jar \
-        #&& curl -s http://central.maven.org/maven2/com/amazon/emr/emr-dynamodb-hive/4.2.0/emr-dynamodb-hive-4.2.0.jar -o /usr/local/spark/jars/emr-dynamodb-hive-4.2.0.jar \
-        #&& curl -s http://central.maven.org/maven2/com/amazon/emr/emr-dynamodb-hadoop/4.2.0/emr-dynamodb-hadoop-4.2.0.jar -o /usr/local/spark/jars/emr-dynamodb-hadoop-4.2.0.jar \
 	&& curl -s http://central.maven.org/maven2/com/amazonaws/aws-java-sdk-dynamodb/1.10.75.1/aws-java-sdk-dynamodb-1.10.75.1.jar -o /usr/local/spark/jars/aws-java-sdk-dynamodb-1.10.75.1.jar \
-	&& curl -s http://central.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.10.75.1/aws-java-sdk-core-1.10.75.1.jar -o /usr/local/spark/jars/aws-java-sdk-core-1.10.75.1.jar
-
+	&& curl -s http://central.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.100/aws-java-sdk-core-1.11.100.jar -o /usr/local/spark/jars/aws-java-sdk-core.jar \
+        && curl -s http://central.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.6.0/hadoop-aws-2.6.0.jar -o /usr/local/spark/jars/hadoop-aws.jar \
+        && curl -s http://central.maven.org/maven2/com/amazonaws/aws-java-sdk-iam/1.11.100/aws-java-sdk-iam-1.11.100.jar -o /usr/local/spark/jars/aws-java-sdk-iam.jar
 
 
 ADD scripts/start-master.sh /start-master.sh
@@ -33,6 +32,7 @@ ADD scripts/script-runner.sh /usr/local/bin/script-runner.sh
 ADD scripts/sql-runner.sh /usr/local/bin/sql-runner.sh
 ADD lib/emr-ddb-hadoop.jar /usr/local/spark/jars/emr-ddb-hadoop.jar
 ADD lib/emr-ddb-hive.jar /usr/local/spark/jars/emr-ddb-hive.jar
+ADD lib/spark-athena-0.2.0.jar /usr/local/spark/jars/spark-athena.jar
 
 RUN apt-get update \
 	&& apt-get install -y python-pandas \
