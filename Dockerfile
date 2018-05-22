@@ -1,9 +1,11 @@
 FROM webgames/awscli-java8
 
+ENV SPARK_VER 2.2.1
+
 RUN \
-	curl -s http://d3kbcqa49mib13.cloudfront.net/spark-2.2.0-bin-hadoop2.6.tgz | tar -xz -C /usr/local/ \
+	curl http://apache.mirrors.tds.net/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop2.6.tgz | tar -xz -C /usr/local/ \
 	&& cd /usr/local \
-	&& ln -s spark-2.2.0-bin-hadoop2.6 spark
+	&& ln -s spark-$SPARK_VER-bin-hadoop2.6 spark
 
 RUN \
 	curl -s http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar -o /usr/local/spark/jars/mysql-connector-java.jar \
@@ -35,12 +37,14 @@ ADD lib/emr-ddb-hive.jar /usr/local/spark/jars/emr-ddb-hive.jar
 ADD lib/spark-athena-0.2.0.jar /usr/local/spark/jars/spark-athena.jar
 
 RUN apt-get update \
-	&& apt-get install -y python-pandas \
+	&& apt-get install -y python3-pip python-pandas \
 	&& rm -rf /var/lib/apt/lists/*
 
 #RUN pip install requests --upgrade 
 
-RUN pip install numpy==1.13.3 numexpr==2.6.4 requests==2.18.4 pandas==0.20.3 elasticsearch==5.4.0 zdesk==2.6.0 boto3
+RUN pip install numpy==1.13.3 numexpr==2.6.4 requests==2.18.4 pandas==0.20.3 elasticsearch==5.4.0 boto3 s3cat
+
+RUN pip3 install boto3
 
 ENV SPARK_HOME /usr/local/spark
 
