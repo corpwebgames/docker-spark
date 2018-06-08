@@ -44,7 +44,7 @@ RUN apt-get update \
 
 RUN pip install numpy==1.13.3 numexpr==2.6.4 requests==2.18.4 pandas==0.20.3 elasticsearch==5.4.0 boto3 s3cat
 
-RUN pip3 install boto3
+RUN pip3 install boto3 && pip install influxdb
 
 ENV SPARK_HOME /usr/local/spark
 
