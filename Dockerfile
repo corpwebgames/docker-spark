@@ -1,6 +1,6 @@
 FROM webgames/awscli-java8
 
-ENV SPARK_VER 2.2.1
+ENV SPARK_VER 2.2.2
 
 RUN \
 	curl http://apache.mirrors.tds.net/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop2.6.tgz | tar -xz -C /usr/local/ \
@@ -42,7 +42,7 @@ RUN apt-get update \
 
 #RUN pip install requests --upgrade 
 
-RUN pip install numpy==1.13.3 numexpr==2.6.4 requests==2.18.4 pandas==0.20.3 elasticsearch==5.4.0 boto3 s3cat
+RUN pip install numpy==1.13.3 numexpr==2.6.4 requests==2.18.4 pandas==0.20.3 elasticsearch==5.4.0 boto3 s3cat pyjks
 
 RUN pip3 install boto3 && pip install influxdb
 
