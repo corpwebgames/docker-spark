@@ -5,6 +5,15 @@ cd /usr/local/spark/bin/
 if aws s3 cp $1 $file ; then
 chmod +x $file
 
+if [ "$KEYSTORE_PATH" ]; then
+    if aws s3 cp $KEYSTORE_PATH . ; then
+      export KEYSTORE_KEY=$(basename $KEYSTORE_PATH)
+    fi
+    if [ -z "$KEYSTORE_SECRET" ]; then
+      export KEYSTORE_SECRET=changeit
+    fi
+fi
+
 if [ "$LIB_PATH" ]; then
     if aws s3 cp s3://$LIB_PATH lib.zip ; then
         unzip -o lib.zip
